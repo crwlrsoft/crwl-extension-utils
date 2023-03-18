@@ -1,0 +1,20 @@
+{
+    "name": "crwlr/crwl-extension-utils",
+    "description": "Utils for extension packages for the crwl.io app.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Crwlr\\CrwlExtensionUtils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "otsch",
+            "email": "otsch@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "crwlr/crawler": "^1.0",
+        "php": "^8.1"
+    }
+}
