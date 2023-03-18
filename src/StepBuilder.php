@@ -12,6 +12,8 @@ abstract class StepBuilder
 
     public readonly string $label;
 
+    public readonly array $config;
+
     public function __construct()
     {
         $this->stepId = $this->stepId();
@@ -19,6 +21,8 @@ abstract class StepBuilder
         $this->group = $this->group();
 
         $this->label = $this->label();
+
+        $this->config = $this->configToArray();
     }
 
     abstract public function stepId(): string;
@@ -38,5 +42,16 @@ abstract class StepBuilder
     public function configParams(): array
     {
         return [];
+    }
+
+    final protected function configToArray(): array
+    {
+        $config = [];
+
+        foreach ($this->configParams() as $configParam) {
+            $config[] = $configParam->toArray();
+        }
+
+        return $config;
     }
 }

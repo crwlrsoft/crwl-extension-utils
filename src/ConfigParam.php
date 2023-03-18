@@ -24,4 +24,9 @@ final class ConfigParam
     {
         return new self(ConfigParamTypes::String, $paramName);
     }
+
+    public function toArray(): array
+    {
+        return ['type' => $this->type->name, 'name' => $this->name];
+    }
 }
