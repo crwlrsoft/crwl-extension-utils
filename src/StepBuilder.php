@@ -8,9 +8,9 @@ abstract class StepBuilder
 {
     public string $label = 'Get details about a place via google places API';
 
-    abstract public function label(): string;
-
     abstract public function stepId(): string;
+
+    abstract public function label(): string;
 
     abstract public function configToStep(array $stepConfig): StepInterface;
 
@@ -20,7 +20,7 @@ abstract class StepBuilder
     }
 
     /**
-     * @return array<string, ConfigParam>
+     * @return array<ConfigParam>
      */
     public function configParams(): array
     {
