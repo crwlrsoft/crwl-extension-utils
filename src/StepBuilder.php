@@ -6,7 +6,20 @@ use Crwlr\Crawler\Steps\StepInterface;
 
 abstract class StepBuilder
 {
-    public string $label = 'Get details about a place via google places API';
+    public readonly string $stepId;
+
+    public readonly string $group;
+
+    public readonly string $label;
+
+    public function __construct()
+    {
+        $this->stepId = $this->stepId();
+
+        $this->group = $this->group();
+
+        $this->label = $this->label();
+    }
 
     abstract public function stepId(): string;
 
