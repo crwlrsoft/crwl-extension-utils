@@ -44,6 +44,17 @@ abstract class StepBuilder
         return [];
     }
 
+    protected function getValueFromConfigArray(string $key, array $configParams): mixed
+    {
+        foreach ($configParams as $configParam) {
+            if ($configParam['name'] === $key) {
+                return $configParam['value'];
+            }
+        }
+
+        return null;
+    }
+
     final protected function configToArray(): array
     {
         $config = [];
