@@ -33,6 +33,6 @@ final class ConfigParam
 
     public function toArray(): array
     {
-        return ['type' => $this->type->name, 'name' => $this->name];
+        return ['type' => $this->type->name, 'name' => $this->name, 'value' => $this->value];
     }
 }
