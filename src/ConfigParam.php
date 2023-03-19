@@ -8,6 +8,8 @@ final class ConfigParam
         public readonly ConfigParamTypes $type,
         public readonly string $name,
         public readonly mixed $value,
+        public readonly string $inputLabel = '',
+        public readonly string $description = '',
     ) {
     }
 
@@ -28,11 +30,27 @@ final class ConfigParam
 
     public function default(mixed $defaultValue): self
     {
-        return new self($this->type, $this->name, $defaultValue);
+        return new self($this->type, $this->name, $defaultValue, $this->inputLabel, $this->description);
+    }
+
+    public function inputLabel(string $label): self
+    {
+        return new self($this->type, $this->name, $this->value, $label, $this->description);
+    }
+
+    public function description(string $description): self
+    {
+        return new self($this->type, $this->name, $this->value, $this->inputLabel, $description);
     }
 
     public function toArray(): array
     {
-        return ['type' => $this->type->name, 'name' => $this->name, 'value' => $this->value];
+        return [
+            'type' => $this->type->name,
+            'name' => $this->name,
+            'value' => $this->value,
+            'inputLabel' => $this->inputLabel,
+            'description' => $this->description,
+        ];
     }
 }
