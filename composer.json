@@ -7,14 +7,31 @@
             "Crwlr\\CrwlExtensionUtils\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
-            "name": "otsch",
-            "email": "otsch@users.noreply.github.com"
+            "name": "Christian Olear",
+            "homepage": "https://www.otsch.codes",
+            "role": "Developer"
         }
     ],
     "require": {
         "crwlr/crawler": "^1.0",
         "php": "^8.1"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.4"
+    },
+    "scripts": {
+        "test": "pest"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
