@@ -60,6 +60,30 @@ test('getPackage() gets registered packages', function () {
     expect($manager->getPackage('bar'))->toBe($packageTwo);
 });
 
+test('getPackages() returns all registered packages', function () {
+    $manager = ExtensionPackageManager::new();
+
+    $manager->registerPackage('foo');
+
+    $manager->registerPackage('bar');
+
+    $registeredPackages = $manager->getPackages();
+
+    expect($registeredPackages)->toHaveCount(2);
+
+    expect($registeredPackages['foo']->name)->toBe('foo');
+
+    expect($registeredPackages['bar']->name)->toBe('bar');
+
+    $manager->registerPackage('baz');
+
+    $registeredPackages = $manager->getPackages();
+
+    expect($registeredPackages)->toHaveCount(3);
+
+    expect($registeredPackages['baz']->name)->toBe('baz');
+});
+
 test('getStepById() gets a step by its id from one of the registered packages', function () {
     $manager = ExtensionPackageManager::new();
 

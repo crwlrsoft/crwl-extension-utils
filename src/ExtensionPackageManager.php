@@ -41,6 +41,14 @@ final class ExtensionPackageManager
         return $this->packages[$name];
     }
 
+    /**
+     * @return ExtensionPackage[]
+     */
+    public function getPackages(): array
+    {
+        return $this->packages;
+    }
+
     public function getPackage(string $name): ?ExtensionPackage
     {
         if (array_key_exists($name, $this->packages)) {
