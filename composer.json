@@ -32,7 +32,8 @@
         "test": "@php vendor/bin/pest",
         "cs": "@php vendor/bin/php-cs-fixer fix -v --dry-run",
         "cs-fix": "@php vendor/bin/php-cs-fixer fix -v",
-        "stan": "@php vendor/bin/phpstan analyse -c phpstan.neon"
+        "stan": "@php vendor/bin/phpstan analyse -c phpstan.neon",
+        "add-git-hooks": "@php bin/add-git-hooks"
     },
     "config": {
         "allow-plugins": {
