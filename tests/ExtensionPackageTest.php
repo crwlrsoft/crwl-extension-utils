@@ -76,17 +76,19 @@ test('getSteps() returns all steps registered for this package', function () {
 
     $anotherPackage = $manager->registerPackage('another-package');
 
-    $package->registerStep(helper_makeStepBuilder('foo'));
+    $package->registerStep(helper_makeStepBuilder('test-package.foo'));
 
-    $package->registerStep(helper_makeStepBuilder('bar'));
+    $package->registerStep(helper_makeStepBuilder('test-package.bar'));
 
-    $package->registerStep(helper_makeStepBuilder('baz'));
+    $package->registerStep(helper_makeStepBuilder('test-package.baz'));
 
-    $anotherPackage->registerStep(helper_makeStepBuilder('quz'));
+    $anotherPackage->registerStep(helper_makeStepBuilder('another-package.quz'));
 
-    expect($package->getSteps())->toHaveCount(3);
+    expect($package->getSteps())
+        ->toHaveCount(3)
+        ->and($anotherPackage->getSteps())
+        ->toHaveCount(1);
 
-    expect($anotherPackage->getSteps())->toHaveCount(1);
 });
 
 it('registered multiple steps in one call with registerSteps()', function () {
@@ -95,9 +97,9 @@ it('registered multiple steps in one call with registerSteps()', function () {
     $package = $manager->registerPackage('test-package');
 
     $package->registerSteps([
-        helper_makeStepBuilder('foo'),
-        helper_makeStepBuilder('bar'),
-        helper_makeStepBuilder('baz'),
+        helper_makeStepBuilder('test-package.foo'),
+        helper_makeStepBuilder('test-package.bar'),
+        helper_makeStepBuilder('test-package.baz'),
     ]);
 
     expect($package->getSteps())->toHaveCount(3);

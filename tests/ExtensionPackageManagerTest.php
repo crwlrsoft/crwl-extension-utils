@@ -91,21 +91,22 @@ test('getStepById() gets a step by its id from one of the registered packages', 
 
     $packageTwo = $manager->registerPackage('bar');
 
-    $stepOne = helper_makeStepBuilder('fooStep');
+    $stepOne = helper_makeStepBuilder('foo.step');
 
-    expect($manager->getStepById('fooStep'))->toBeNull();
+    expect($manager->getStepById('foo.step'))->toBeNull();
 
     $packageOne->registerStep($stepOne);
 
-    expect($manager->getStepById('fooStep'))->toBe($stepOne);
+    expect($manager->getStepById('foo.step'))->toBe($stepOne);
 
-    $stepTwo = helper_makeStepBuilder('barStep');
+    $stepTwo = helper_makeStepBuilder('bar.step');
 
-    expect($manager->getStepById('barStep'))->toBeNull();
+    expect($manager->getStepById('bar.step'))->toBeNull();
 
     $packageTwo->registerStep($stepTwo);
 
-    expect($manager->getStepById('barStep'))->toBe($stepTwo);
-
-    expect($manager->getStepById('bazStep'))->toBeNull();
+    expect($manager->getStepById('bar.step'))
+        ->toBe($stepTwo)
+        ->and($manager->getStepById('baz.step'))
+        ->toBeNull();
 });

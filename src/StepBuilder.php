@@ -3,6 +3,7 @@
 namespace Crwlr\CrwlExtensionUtils;
 
 use Crwlr\Crawler\Steps\StepInterface;
+use Crwlr\CrwlExtensionUtils\Exceptions\InvalidStepBuilderException;
 
 abstract class StepBuilder
 {
@@ -14,6 +15,9 @@ abstract class StepBuilder
 
     public readonly array $config;
 
+    /**
+     * @throws InvalidStepBuilderException
+     */
     public function __construct()
     {
         $this->stepId = $this->stepId();
@@ -31,8 +35,15 @@ abstract class StepBuilder
 
     abstract public function configToStep(array $stepConfig): StepInterface;
 
+    /**
+     * @throws InvalidStepBuilderException
+     */
     public function group(): string
     {
+        if (!str_contains($this->stepId(), '.')) {
+            throw new InvalidStepBuilderException('The stepId must contain a "." to separate group and step name.');
+        }
+
         return explode('.', $this->stepId())[0];
     }
 
