@@ -81,9 +81,7 @@ it('gets a value from a step config array', function () {
             $valueFromConfigArray = $this->getValueFromConfigArray('someKey', $stepConfig);
 
             return new class ($valueFromConfigArray) extends Step {
-                public function __construct(private readonly string $value)
-                {
-                }
+                public function __construct(private readonly string $value) {}
 
                 protected function invoke(mixed $input): Generator
                 {
