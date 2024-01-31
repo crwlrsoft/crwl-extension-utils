@@ -4,6 +4,4 @@ namespace Crwlr\CrwlExtensionUtils\Exceptions;
 
 use Exception;
 
-class InvalidStepBuilderException extends Exception
-{
-}
+class InvalidStepBuilderException extends Exception {}

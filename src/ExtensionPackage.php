@@ -15,8 +15,7 @@ final class ExtensionPackage
     public function __construct(
         private readonly ExtensionPackageManager $manager,
         public readonly string $name = '',
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string|StepBuilder> $steps
