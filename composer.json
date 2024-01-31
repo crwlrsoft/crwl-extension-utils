@@ -24,10 +24,13 @@
         "php": "^8.1"
     },
     "require-dev": {
-        "pestphp/pest": "^2.4"
+        "pestphp/pest": "^2.4",
+        "friendsofphp/php-cs-fixer": "^3.48"
     },
     "scripts": {
-        "test": "pest"
+        "test": "@php vendor/bin/pest",
+        "cs": "@php vendor/bin/php-cs-fixer fix -v --dry-run",
+        "cs-fix": "@php vendor/bin/php-cs-fixer fix -v"
     },
     "config": {
         "allow-plugins": {

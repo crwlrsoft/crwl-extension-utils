@@ -10,8 +10,7 @@ final class ConfigParam
         public readonly mixed $value,
         public readonly string $inputLabel = '',
         public readonly string $description = '',
-    ) {
-    }
+    ) {}
 
     public static function bool(string $paramName): self
     {

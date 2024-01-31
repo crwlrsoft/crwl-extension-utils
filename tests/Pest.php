@@ -45,8 +45,7 @@ expect()->extend('toBeOne', function () {
 
 function helper_makeStepBuilder(string $stepId): StepBuilder
 {
-    return new class ($stepId) extends StepBuilder
-    {
+    return new class ($stepId) extends StepBuilder {
         public function __construct(private readonly string $stepIdArg)
         {
             parent::__construct();
@@ -64,8 +63,7 @@ function helper_makeStepBuilder(string $stepId): StepBuilder
 
         public function configToStep(array $stepConfig): StepInterface
         {
-            return new class () extends Step
-            {
+            return new class () extends Step {
                 protected function invoke(mixed $input): Generator
                 {
                     yield $input;

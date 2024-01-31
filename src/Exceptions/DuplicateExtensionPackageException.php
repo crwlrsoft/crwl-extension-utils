@@ -4,6 +4,4 @@ namespace Crwlr\CrwlExtensionUtils\Exceptions;
 
 use Exception;
 
-class DuplicateExtensionPackageException extends Exception
-{
-}
+class DuplicateExtensionPackageException extends Exception {}
