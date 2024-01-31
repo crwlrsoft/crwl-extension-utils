@@ -1,5 +1,9 @@
 <?php
 
+use Crwlr\Crawler\Steps\Step;
+use Crwlr\Crawler\Steps\StepInterface;
+use Crwlr\CrwlExtensionUtils\StepBuilder;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -23,14 +27,6 @@
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-
-use Crwlr\Crawler\Steps\Step;
-use Crwlr\Crawler\Steps\StepInterface;
-use Crwlr\CrwlExtensionUtils\StepBuilder;
-
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
 
 /*
 |--------------------------------------------------------------------------
