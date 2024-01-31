@@ -25,12 +25,14 @@
     },
     "require-dev": {
         "pestphp/pest": "^2.4",
-        "friendsofphp/php-cs-fixer": "^3.48"
+        "friendsofphp/php-cs-fixer": "^3.48",
+        "phpstan/phpstan": "^1.10"
     },
     "scripts": {
         "test": "@php vendor/bin/pest",
         "cs": "@php vendor/bin/php-cs-fixer fix -v --dry-run",
-        "cs-fix": "@php vendor/bin/php-cs-fixer fix -v"
+        "cs-fix": "@php vendor/bin/php-cs-fixer fix -v",
+        "stan": "@php vendor/bin/phpstan analyse -c phpstan.neon"
     },
     "config": {
         "allow-plugins": {

@@ -18,6 +18,9 @@ class InvalidStep
         return 'This dummy step is invalid because it does not extend the StepBuilder class';
     }
 
+    /**
+     * @param mixed[] $stepConfig
+     */
     public function configToStep(array $stepConfig): StepInterface
     {
         return new class () extends Step {

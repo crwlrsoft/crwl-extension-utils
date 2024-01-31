@@ -13,6 +13,9 @@ abstract class StepBuilder
 
     public readonly string $label;
 
+    /**
+     * @var array<int, array<string, mixed>>
+     */
     public readonly array $config;
 
     /**
@@ -33,6 +36,9 @@ abstract class StepBuilder
 
     abstract public function label(): string;
 
+    /**
+     * @param mixed[] $stepConfig
+     */
     abstract public function configToStep(array $stepConfig): StepInterface;
 
     /**
@@ -55,6 +61,9 @@ abstract class StepBuilder
         return [];
     }
 
+    /**
+     * @param mixed[] $configParams
+     */
     protected function getValueFromConfigArray(string $key, array $configParams): mixed
     {
         foreach ($configParams as $configParam) {
@@ -66,6 +75,9 @@ abstract class StepBuilder
         return null;
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     final protected function configToArray(): array
     {
         $config = [];

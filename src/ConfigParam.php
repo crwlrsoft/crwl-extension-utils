@@ -42,6 +42,9 @@ final class ConfigParam
         return new self($this->type, $this->name, $this->value, $this->inputLabel, $description);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
