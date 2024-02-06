@@ -139,6 +139,15 @@ class MyStepBuilder extends StepBuilder
 }
 ```
 
+If your step needs a filesystem path, where it can store files, you can use `$this->fileStoragePath` inside the builder. The crwl.io app sets this path for all step builders before building any steps.
+
+```php
+public function configToStep(array $stepConfig): StepInterface
+{
+    return new MyStep($this->fileStoragePath);
+}
+```
+
 ### ServiceProvider and Registering Package and Steps
 
 To make your steps accessible in the crwl.io app, the final step is to register an extension package and all your steps using the `ExtensionPackageManager` included in this package. Since crwl.io is a [Laravel](https://laravel.com/) application, this is accomplished through a `ServiceProvider` class:
