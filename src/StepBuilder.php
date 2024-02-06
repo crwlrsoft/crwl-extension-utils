@@ -18,6 +18,8 @@ abstract class StepBuilder
      */
     public readonly array $config;
 
+    protected ?string $fileStoragePath = null;
+
     /**
      * @throws InvalidStepBuilderException
      */
@@ -59,6 +61,11 @@ abstract class StepBuilder
     public function configParams(): array
     {
         return [];
+    }
+
+    public function setFileStoragePath(string $path): void
+    {
+        $this->fileStoragePath = $path;
     }
 
     /**
