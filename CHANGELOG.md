@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.2.0] - 2024-02-07
+## [2.0.0] - 2024-02-07
 ### Changed
-* Require `illuminate/support` and register `ExtensionPackageManager` as a singleton via a new `ServiceProvider`.
+* Require `illuminate/support`, register `ExtensionPackageManager` as a singleton via a new `ServiceProvider` and remove `ExtensionPackageManager::singleton()` and `ExtensionPackageManager::new()` methods.
 
 ## [1.1.0] - 2024-02-07
 ### Added
