@@ -6,22 +6,8 @@ use Crwlr\CrwlExtensionUtils\Exceptions\DuplicateExtensionPackageException;
 use Crwlr\CrwlExtensionUtils\ExtensionPackage;
 use Crwlr\CrwlExtensionUtils\ExtensionPackageManager;
 
-test('singleton() creates an instance at the first call and always returns that one afterwards', function () {
-    $manager = ExtensionPackageManager::singleton();
-
-    expect($manager->getPackage('firstPackage'))->toBeNull();
-
-    $firstPackage = $manager->registerPackage('firstPackage');
-
-    expect($manager->getPackage('firstPackage'))->toBe($firstPackage);
-
-    $anotherManager = ExtensionPackageManager::singleton();
-
-    expect($anotherManager->getPackage('firstPackage'))->toBe($firstPackage);
-});
-
 test('new() creates a new instance on each consecutive call', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     expect($manager->getPackage('firstPackage'))->toBeNull();
 
@@ -29,13 +15,13 @@ test('new() creates a new instance on each consecutive call', function () {
 
     expect($manager->getPackage('firstPackage'))->toBe($firstPackage);
 
-    $anotherManager = ExtensionPackageManager::new();
+    $anotherManager = new ExtensionPackageManager();
 
     expect($anotherManager->getPackage('firstPackage'))->toBeNull();
 });
 
 test('registerPackage creates an instance of ExtensionPackage with the package name', function () {
-    $registeredPackage = ExtensionPackageManager::new()->registerPackage('fooBar');
+    $registeredPackage = (new ExtensionPackageManager())->registerPackage('fooBar');
 
     expect($registeredPackage)->toBeInstanceOf(ExtensionPackage::class);
 
@@ -43,13 +29,15 @@ test('registerPackage creates an instance of ExtensionPackage with the package n
 });
 
 it('throws an exception when a package with a certain name is already registered', function () {
-    ExtensionPackageManager::singleton()->registerPackage('foo');
+    $manager = new ExtensionPackageManager();
 
-    ExtensionPackageManager::singleton()->registerPackage('foo');
+    $manager->registerPackage('foo');
+
+    $manager->registerPackage('foo');
 })->throws(DuplicateExtensionPackageException::class);
 
 test('getPackage() gets registered packages', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     $packageOne = $manager->registerPackage('foo');
 
@@ -61,7 +49,7 @@ test('getPackage() gets registered packages', function () {
 });
 
 test('getPackages() returns all registered packages', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     $manager->registerPackage('foo');
 
@@ -85,7 +73,7 @@ test('getPackages() returns all registered packages', function () {
 });
 
 test('getStepById() gets a step by its id from one of the registered packages', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     $packageOne = $manager->registerPackage('foo');
 

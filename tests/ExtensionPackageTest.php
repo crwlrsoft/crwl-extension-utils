@@ -10,7 +10,7 @@ use Tests\stubs\DummyStep;
 use Tests\stubs\InvalidStep;
 
 it('registers a step with an instance of the StepBuilder class', function () {
-    $package = new ExtensionPackage(ExtensionPackageManager::new(), 'test-package');
+    $package = new ExtensionPackage(new ExtensionPackageManager(), 'test-package');
 
     $stepBuilder = helper_makeStepBuilder('foo.step');
 
@@ -20,7 +20,7 @@ it('registers a step with an instance of the StepBuilder class', function () {
 });
 
 it('registers a step with the full class name string', function () {
-    $package = new ExtensionPackage(ExtensionPackageManager::new(), 'test-package');
+    $package = new ExtensionPackage(new ExtensionPackageManager(), 'test-package');
 
     $package->registerStep(DummyStep::class);
 
@@ -28,19 +28,19 @@ it('registers a step with the full class name string', function () {
 });
 
 it('throws an exception if the provided class name does not exist', function () {
-    $package = new ExtensionPackage(ExtensionPackageManager::new(), 'test-package');
+    $package = new ExtensionPackage(new ExtensionPackageManager(), 'test-package');
 
     $package->registerStep('UnknownStepBuilder');
 })->throws(InvalidStepException::class);
 
 it('throws an exception if the provided class name is not does not extend the StepBuilder class', function () {
-    $package = new ExtensionPackage(ExtensionPackageManager::new(), 'test-package');
+    $package = new ExtensionPackage(new ExtensionPackageManager(), 'test-package');
 
     $package->registerStep(InvalidStep::class);
 })->throws(InvalidStepException::class);
 
 it('throws an exception if another step with the same ID is registered already', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     $package = $manager->registerPackage('test-package');
 
@@ -55,7 +55,7 @@ it(
     'also throws an exception if another step with the same ID is registered already in another package, registered ' .
     'in the same manager',
     function () {
-        $manager = ExtensionPackageManager::new();
+        $manager = new ExtensionPackageManager();
 
         $package = $manager->registerPackage('test-package');
 
@@ -70,7 +70,7 @@ it(
 )->throws(DuplicateStepIdException::class);
 
 test('getSteps() returns all steps registered for this package', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     $package = $manager->registerPackage('test-package');
 
@@ -92,7 +92,7 @@ test('getSteps() returns all steps registered for this package', function () {
 });
 
 it('registered multiple steps in one call with registerSteps()', function () {
-    $manager = ExtensionPackageManager::new();
+    $manager = new ExtensionPackageManager();
 
     $package = $manager->registerPackage('test-package');
 

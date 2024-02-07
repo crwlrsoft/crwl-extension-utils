@@ -11,22 +11,6 @@ final class ExtensionPackageManager
      */
     private array $packages = [];
 
-    private static ?self $instance = null;
-
-    public static function singleton(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    public static function new(): self
-    {
-        return new self();
-    }
-
     /**
      * @throws DuplicateExtensionPackageException
      */

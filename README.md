@@ -164,7 +164,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
     {
-        ExtensionPackageManager::singleton()
+        $this->app->make(ExtensionPackageManager::class)
             ->registerPackage('my-vendor-name/my-crwl-extension')
             ->registerStep(FooStepBuilder::class)
             ->registerStep(BarStepBuilder::class)
