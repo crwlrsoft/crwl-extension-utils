@@ -36,6 +36,13 @@
         "stan": "@php vendor/bin/phpstan analyse -c phpstan.neon",
         "add-git-hooks": "@php bin/add-git-hooks"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Crwlr\\CrwlExtensionUtils\\ServiceProvider"
+            ]
+        }
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
