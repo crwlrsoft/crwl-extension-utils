@@ -2,14 +2,16 @@
 
 namespace Crwlr\CrwlExtensionUtils;
 
-use Illuminate\Contracts\Foundation\Application;
-
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(ExtensionPackageManager::class, function (Application $app) {
+        $this->app->singleton(ExtensionPackageManager::class, function () {
             return new ExtensionPackageManager();
+        });
+
+        $this->app->singleton(RequestTracker::class, function () {
+            return new RequestTracker();
         });
     }
 }
