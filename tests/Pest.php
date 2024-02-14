@@ -2,42 +2,40 @@
 
 use Crwlr\Crawler\Steps\Step;
 use Crwlr\Crawler\Steps\StepInterface;
+use Crwlr\CrwlExtensionUtils\RequestTracker;
 use Crwlr\CrwlExtensionUtils\StepBuilder;
+use Crwlr\CrwlExtensionUtils\TrackingGuzzleClientFactory;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Symfony\Component\Process\Process;
+use Tests\TestCase;
 
-/*
-|--------------------------------------------------------------------------
-| Test Case
-|--------------------------------------------------------------------------
-|
-| The closure you provide to your test functions is always bound to a specific PHPUnit test
-| case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
-| need to change it using the "uses()" function to bind a different classes or traits.
-|
-*/
+uses(TestCase::class)->in(__DIR__);
 
-// uses(Tests\TestCase::class)->in('Feature');
+class TestServerProcess
+{
+    public static ?Process $process = null;
+}
 
-/*
-|--------------------------------------------------------------------------
-| Expectations
-|--------------------------------------------------------------------------
-|
-| When you're writing tests, you often need to check that values meet certain conditions. The
-| "expect()" function gives you access to a set of "expectations" methods that you can use
-| to assert different things. Of course, you may extend the Expectation API at any time.
-|
-*/
+uses()
+    ->group('integration')
+    ->beforeEach(function () {
+        if (!isset(TestServerProcess::$process)) {
+            TestServerProcess::$process = Process::fromShellCommandline(
+                'php -S localhost:8000 ' . __DIR__ . '/_Integration/Server.php'
+            );
 
-/*
-|--------------------------------------------------------------------------
-| Functions
-|--------------------------------------------------------------------------
-|
-| While Pest is very powerful out-of-the-box, you may have some testing code specific to your
-| project that you don't want to repeat in every file. Here you can also expose helpers as
-| global functions to help you to reduce the number of lines of code in your test files.
-|
-*/
+            TestServerProcess::$process->start();
+
+            usleep(100000);
+        }
+    })
+    ->afterAll(function () {
+        TestServerProcess::$process?->stop(3, SIGINT);
+
+        TestServerProcess::$process = null;
+    })
+    ->in('_Integration');
 
 function helper_makeStepBuilder(string $stepId): StepBuilder
 {
@@ -67,4 +65,20 @@ function helper_makeStepBuilder(string $stepId): StepBuilder
             };
         }
     };
+}
+
+/**
+ * @throws BindingResolutionException
+ */
+function helper_getTrackingGuzzleClient(): Client
+{
+    return app()->make(TrackingGuzzleClientFactory::class)->getClient();
+}
+
+/**
+ * @throws BindingResolutionException
+ */
+function helper_getRequestTracker(): RequestTracker
+{
+    return app()->make(RequestTracker::class);
 }
