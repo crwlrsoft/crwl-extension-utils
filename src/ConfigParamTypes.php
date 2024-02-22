@@ -8,5 +8,7 @@ enum ConfigParamTypes
 
     case Int;
 
+    case Float;
+
     case String;
 }
