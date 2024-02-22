@@ -47,7 +47,7 @@ it('makes a float config param instance', function () {
         ->toBe('foo')
         ->and($configParam->value)
         ->toBe(0.0);
-})->only();
+});
 
 it('makes a new instance with a default value', function () {
     $instance = new ConfigParam(
