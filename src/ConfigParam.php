@@ -22,6 +22,11 @@ final class ConfigParam
         return new self(ConfigParamTypes::Int, $paramName, 0);
     }
 
+    public static function float(string $paramName): self
+    {
+        return new self(ConfigParamTypes::Float, $paramName, 0.0);
+    }
+
     public static function string(string $paramName): self
     {
         return new self(ConfigParamTypes::String, $paramName, '');

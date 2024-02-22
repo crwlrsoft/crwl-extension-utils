@@ -38,6 +38,17 @@ it('makes an int config param instance', function () {
         ->toBe(0);
 });
 
+it('makes a float config param instance', function () {
+    $configParam = ConfigParam::float('foo');
+
+    expect($configParam->type)
+        ->toBe(ConfigParamTypes::Float)
+        ->and($configParam->name)
+        ->toBe('foo')
+        ->and($configParam->value)
+        ->toBe(0.0);
+})->only();
+
 it('makes a new instance with a default value', function () {
     $instance = new ConfigParam(
         ConfigParamTypes::Int,
