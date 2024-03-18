@@ -11,4 +11,6 @@ enum ConfigParamTypes
     case Float;
 
     case String;
+
+    case MultiLineString;
 }

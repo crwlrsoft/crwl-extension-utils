@@ -32,6 +32,11 @@ final class ConfigParam
         return new self(ConfigParamTypes::String, $paramName, '');
     }
 
+    public static function multiLineString(string $paramName): self
+    {
+        return new self(ConfigParamTypes::MultiLineString, $paramName, '');
+    }
+
     public function default(mixed $defaultValue): self
     {
         return new self($this->type, $this->name, $defaultValue, $this->inputLabel, $this->description);

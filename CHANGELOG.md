@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2024-03-18
+### Added
+* New config param type multi line string (`ConfigParam::multiLineString()` / `ConfigParamTypes::MultiLineString`).
+
 ## [2.2.0] - 2024-02-22
 ### Added
 * New config param type float (`ConfigParam::float()` / `ConfigParamTypes::Float`).
