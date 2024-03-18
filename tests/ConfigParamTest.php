@@ -27,6 +27,17 @@ it('makes a string config param instance', function () {
         ->toBe('');
 });
 
+it('makes a multi line string config param instance', function () {
+    $configParam = ConfigParam::multiLineString('foo');
+
+    expect($configParam->type)
+        ->toBe(ConfigParamTypes::MultiLineString)
+        ->and($configParam->name)
+        ->toBe('foo')
+        ->and($configParam->value)
+        ->toBe('');
+});
+
 it('makes an int config param instance', function () {
     $configParam = ConfigParam::int('foo');
 
