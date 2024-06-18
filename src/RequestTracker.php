@@ -41,7 +41,7 @@ final class RequestTracker
 
     public function trackHeadlessBrowserResponse(
         ?RequestInterface $request = null,
-        ?ResponseInterface $response = null
+        ?ResponseInterface $response = null,
     ): void {
         foreach ($this->onHeadlessBrowserResponse as $closure) {
             $closure->call($this, $request, $response);

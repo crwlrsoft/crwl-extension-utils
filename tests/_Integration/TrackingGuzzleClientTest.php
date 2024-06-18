@@ -14,7 +14,7 @@ it('tracks an HTTP response', function () {
     $tracker->onHttpResponse(
         function (?RequestInterface $request, ?ResponseInterface $response) use (&$trackedResponses) {
             $trackedResponses[] = $response;
-        }
+        },
     );
 
     expect($trackedResponses)->toHaveCount(0);
@@ -41,7 +41,7 @@ it('tracks an HTTP response also when it is a client error response (4xx)', func
     $tracker->onHttpResponse(
         function (?RequestInterface $request, ?ResponseInterface $response) use (&$trackedResponses) {
             $trackedResponses[] = $response;
-        }
+        },
     );
 
     expect($trackedResponses)->toHaveCount(0);
@@ -68,7 +68,7 @@ it('tracks an HTTP response also when it is a server error response (5xx)', func
     $tracker->onHttpResponse(
         function (?RequestInterface $request, ?ResponseInterface $response) use (&$trackedResponses) {
             $trackedResponses[] = $response;
-        }
+        },
     );
 
     expect($trackedResponses)->toHaveCount(0);

@@ -66,7 +66,7 @@ it(
         $anotherPackage = $manager->registerPackage('another-package');
 
         $anotherPackage->registerStep(DummyStep::class);
-    }
+    },
 )->throws(DuplicateStepIdException::class);
 
 test('getSteps() returns all steps registered for this package', function () {
