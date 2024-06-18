@@ -22,7 +22,7 @@ uses()
     ->beforeEach(function () {
         if (!isset(TestServerProcess::$process)) {
             TestServerProcess::$process = Process::fromShellCommandline(
-                'php -S localhost:8000 ' . __DIR__ . '/_Integration/Server.php'
+                'php -S localhost:8000 ' . __DIR__ . '/_Integration/Server.php',
             );
 
             TestServerProcess::$process->start();

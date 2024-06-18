@@ -151,7 +151,7 @@ it('turns the config params into an array', function () {
 
                 ConfigParam::bool('someBool')
                     ->inputLabel('Input label for some bool')
-                    ->description('This is a boolean config param')
+                    ->description('This is a boolean config param'),
             ];
         }
     };

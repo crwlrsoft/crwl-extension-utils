@@ -49,7 +49,7 @@ it('calls the callback with the provided request and response objects for http r
                 ->toBeInstanceOf(ResponseInterface::class);
 
             $callbackCalled = true;
-        }
+        },
     );
 
     $tracker->trackHttpResponse($request, $response);
@@ -98,7 +98,7 @@ it('calls the callback with the provided request and response objects for headle
                 ->toBeInstanceOf(ResponseInterface::class);
 
             $callbackCalled = true;
-        }
+        },
     );
 
     $tracker->trackHeadlessBrowserResponse($request, $response);
