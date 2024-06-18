@@ -180,3 +180,108 @@ it('turns the config params into an array', function () {
         ],
     ]);
 });
+
+it('casts config values based on their configured type when using getValueFromConfigArray()', function () {
+    $builder = new class () extends StepBuilder {
+        public function stepId(): string
+        {
+            return 'foo.bar';
+        }
+
+        public function label(): string
+        {
+            return 'Demo step.';
+        }
+
+        /**
+         * @param mixed[] $stepConfig
+         * @return StepInterface
+         */
+        public function configToStep(array $stepConfig): StepInterface
+        {
+            $values = [
+                'bool' => $this->getValueFromConfigArray('bool', $stepConfig),
+                'int' => $this->getValueFromConfigArray('int', $stepConfig),
+                'float' => $this->getValueFromConfigArray('float', $stepConfig),
+                'string' => $this->getValueFromConfigArray('string', $stepConfig),
+                'multiLineString' => $this->getValueFromConfigArray('multiLineString', $stepConfig),
+                'notExisting' => $this->getValueFromConfigArray('notExisting', $stepConfig),
+            ];
+
+            return new class ($values) extends Step {
+                /**
+                 * @param array<string, mixed> $values
+                 */
+                public function __construct(public readonly array $values) {}
+
+                protected function invoke(mixed $input): Generator
+                {
+                    yield 'servas';
+                }
+            };
+        }
+
+        /**
+         * @return array<int, ConfigParam>
+         */
+        public function configParams(): array
+        {
+            return [
+                ConfigParam::bool('bool'),
+                ConfigParam::int('int'),
+                ConfigParam::float('float'),
+                ConfigParam::string('string'),
+                ConfigParam::multiLineString('multiLineString'),
+            ];
+        }
+    };
+
+    $stepConfig = [
+        [
+            'name' => 'bool',
+            'type' => 'Bool',
+            'value' => '1',
+            'inputLabel' => '',
+            'description' => '',
+        ],
+        [
+            'name' => 'int',
+            'type' => 'Int',
+            'value' => '1',
+            'inputLabel' => '',
+            'description' => '',
+        ],
+        [
+            'name' => 'float',
+            'type' => 'Float',
+            'value' => '1.32',
+            'inputLabel' => '',
+            'description' => '',
+        ],
+        [
+            'name' => 'string',
+            'type' => 'String',
+            'value' => 123,
+            'inputLabel' => '',
+            'description' => '',
+        ],
+        [
+            'name' => 'multiLineString',
+            'type' => 'MultiLineString',
+            'value' => 12345,
+            'inputLabel' => '',
+            'description' => '',
+        ],
+    ];
+
+    $step = $builder->configToStep($stepConfig);
+
+    expect($step->values)->toBe([ // @phpstan-ignore-line
+        'bool' => true,
+        'int' => 1,
+        'float' => 1.32,
+        'string' => '123',
+        'multiLineString' => '12345',
+        'notExisting' => null,
+    ]);
+});
