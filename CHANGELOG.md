@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.1] - 2024-06-18
+### Fixed
+* It tries to cast step config values based on their configured type when using `StepBuilder::getValueFromConfigArray()`.
+
 ## [2.3.0] - 2024-03-18
 ### Added
 * New config param type multi line string (`ConfigParam::multiLineString()` / `ConfigParamTypes::MultiLineString`).

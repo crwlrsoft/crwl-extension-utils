@@ -65,4 +65,19 @@ final class ConfigParam
             'description' => $this->description,
         ];
     }
+
+    public function castValue(mixed $value): mixed
+    {
+        if ($this->type === ConfigParamTypes::Bool) {
+            return is_bool($value) ? $value : (bool) $value;
+        } elseif ($this->type === ConfigParamTypes::Int) {
+            return is_int($value) ? $value : (int) $value;
+        } elseif ($this->type === ConfigParamTypes::Float) {
+            return is_float($value) ? $value : (float) $value;
+        } elseif ($this->type === ConfigParamTypes::String || $this->type === ConfigParamTypes::MultiLineString) {
+            return is_string($value) ? $value : (string) $value;
+        }
+
+        return $value; // @phpstan-ignore-line
+    }
 }

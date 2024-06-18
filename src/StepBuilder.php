@@ -69,13 +69,30 @@ abstract class StepBuilder
     }
 
     /**
-     * @param mixed[] $configParams
+     * @param mixed[] $configDataArray
      */
-    protected function getValueFromConfigArray(string $key, array $configParams): mixed
+    protected function getValueFromConfigArray(string $key, array $configDataArray): mixed
     {
-        foreach ($configParams as $configParam) {
-            if ($configParam['name'] === $key) {
-                return $configParam['value'];
+        foreach ($configDataArray as $configDataProperty) {
+            if ($configDataProperty['name'] === $key) {
+                $configParam = $this->getConfigParam($key);
+
+                if ($configParam) {
+                    return $configParam->castValue($configDataProperty['value']);
+                }
+
+                return $configDataProperty['value'];
+            }
+        }
+
+        return null;
+    }
+
+    protected function getConfigParam(string $key): ?ConfigParam
+    {
+        foreach ($this->configParams() as $configParam) {
+            if ($configParam->name === $key) {
+                return $configParam;
             }
         }
 
