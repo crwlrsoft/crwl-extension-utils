@@ -57,7 +57,7 @@ function helper_makeStepBuilder(string $stepId): StepBuilder
 
         public function configToStep(array $stepConfig): StepInterface
         {
-            return new class () extends Step {
+            return new class extends Step {
                 protected function invoke(mixed $input): Generator
                 {
                     yield $input;
