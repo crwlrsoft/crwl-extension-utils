@@ -12,7 +12,7 @@ use Crwlr\CrwlExtensionUtils\StepBuilder;
 use Generator;
 
 it('throws an exception when the stepId() does not contain a "."', function () {
-    new class () extends StepBuilder {
+    new class extends StepBuilder {
         public function stepId(): string
         {
             return 'groupName-stepName';
@@ -25,7 +25,7 @@ it('throws an exception when the stepId() does not contain a "."', function () {
 
         public function configToStep(array $stepConfig): StepInterface
         {
-            return new class () extends Step {
+            return new class extends Step {
                 protected function invoke(mixed $input): Generator
                 {
                     yield 'yolo';
@@ -36,7 +36,7 @@ it('throws an exception when the stepId() does not contain a "."', function () {
 })->throws(InvalidStepBuilderException::class);
 
 it('correctly gets group when stepId contains a "."', function () {
-    $builder = new class () extends StepBuilder {
+    $builder = new class extends StepBuilder {
         public function stepId(): string
         {
             return 'foo.bar';
@@ -49,7 +49,7 @@ it('correctly gets group when stepId contains a "."', function () {
 
         public function configToStep(array $stepConfig): StepInterface
         {
-            return new class () extends Step {
+            return new class extends Step {
                 protected function invoke(mixed $input): Generator
                 {
                     yield 'yo';
@@ -65,7 +65,7 @@ it('correctly gets group when stepId contains a "."', function () {
 });
 
 it('gets a value from a step config array', function () {
-    $builder = new class () extends StepBuilder {
+    $builder = new class extends StepBuilder {
         public function stepId(): string
         {
             return 'test.foo';
@@ -114,7 +114,7 @@ it('gets a value from a step config array', function () {
 });
 
 it('turns the config params into an array', function () {
-    $builder = new class () extends StepBuilder {
+    $builder = new class extends StepBuilder {
         public function stepId(): string
         {
             return 'test.bar';
@@ -127,7 +127,7 @@ it('turns the config params into an array', function () {
 
         public function configToStep(array $stepConfig): StepInterface
         {
-            return new class () extends Step {
+            return new class extends Step {
                 protected function invoke(mixed $input): Generator
                 {
                     yield 'foo';
@@ -182,7 +182,7 @@ it('turns the config params into an array', function () {
 });
 
 it('casts config values based on their configured type when using getValueFromConfigArray()', function () {
-    $builder = new class () extends StepBuilder {
+    $builder = new class extends StepBuilder {
         public function stepId(): string
         {
             return 'foo.bar';
