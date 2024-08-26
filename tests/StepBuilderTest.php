@@ -90,7 +90,8 @@ it(
             }
         };
 
-        expect($builder->outputType())->toBe(StepOutputType::Mixed);
+        expect($builder->outputType())->toBe(StepOutputType::Mixed)
+            ->and($builder->outputType)->toBe('mixed');
     },
 );
 
@@ -122,7 +123,43 @@ test('you can implement an outputType() method in a child class', function () {
         }
     };
 
-    expect($builder->outputType())->toBe(StepOutputType::Scalar);
+    expect($builder->outputType())->toBe(StepOutputType::Scalar)
+        ->and($builder->outputType)->toBe('scalar');
+});
+
+it('writes values from (abstract) methods, to class properties in the constructor', function () {
+    $builder = new class extends StepBuilder {
+        public function stepId(): string
+        {
+            return 'ser.vus';
+        }
+
+        public function label(): string
+        {
+            return 'Hey Servus';
+        }
+
+        public function configToStep(array $stepConfig): StepInterface
+        {
+            return new class extends Step {
+                protected function invoke(mixed $input): Generator
+                {
+                    yield 'servus';
+                }
+            };
+        }
+
+        public function outputType(): StepOutputType
+        {
+            return StepOutputType::AssociativeArrayOrObject;
+        }
+    };
+
+    expect($builder->stepId)->toBe('ser.vus')
+        ->and($builder->group)->toBe('ser')
+        ->and($builder->label)->toBe('Hey Servus')
+        ->and($builder->config)->toBe([])
+        ->and($builder->outputType)->toBe('array');
 });
 
 it('gets a value from a step config array', function () {
