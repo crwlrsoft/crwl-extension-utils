@@ -63,6 +63,7 @@ To create a `StepBuilder` for your step, follow the example below:
 namespace MyVendor\MyCrwlExtension\StepBuilders;
 
 use Crwlr\Crawler\Steps\StepInterface;
+use Crwlr\Crawler\Steps\StepOutputType;
 use Crwlr\CrwlExtensionUtils\ConfigParam;
 use Crwlr\CrwlExtensionUtils\StepBuilder;
 use MyVendor\MyCrwlExtension\Steps\MyStep;
@@ -103,6 +104,17 @@ class MyStepBuilder extends StepBuilder
                 ->inputLabel('Baz?'),
         ];
     }
+
+    /**
+     * Define the possible output type. More info at
+     * https://www.crwlr.software/packages/crawler/v1.10/steps-and-data-flow/custom-steps#step-output-types
+     * If the underlying step can yield different output types based on the configuration,
+     * just return StepOutputType::Mixed. 
+     */
+    public function outputType(): StepOutputType
+    {
+        return StepOutputType::AssociativeArrayOrObject;
+    }
 }
 ```
 
@@ -116,7 +128,7 @@ If your step doesn't require any settings, the `StepBuilder` looks rather minima
 namespace MyVendor\MyCrwlExtension\StepBuilders;
 
 use Crwlr\Crawler\Steps\StepInterface;
-use Crwlr\CrwlExtensionUtils\StepBuilder;
+use Crwlr\Crawler\Steps\StepOutputType;use Crwlr\CrwlExtensionUtils\StepBuilder;
 use MyVendor\MyCrwlExtension\Steps\MyStep;
 
 class MyStepBuilder extends StepBuilder
@@ -136,6 +148,10 @@ class MyStepBuilder extends StepBuilder
         return new MyStep();
     }
 
+    public function outputType(): StepOutputType
+    {
+        return StepOutputType::Scalar;
+    }
 }
 ```
 

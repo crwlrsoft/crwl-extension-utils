@@ -6,6 +6,7 @@ use Crwlr\Crawler\Input;
 use Crwlr\Crawler\Output;
 use Crwlr\Crawler\Steps\Step;
 use Crwlr\Crawler\Steps\StepInterface;
+use Crwlr\Crawler\Steps\StepOutputType;
 use Crwlr\CrwlExtensionUtils\ConfigParam;
 use Crwlr\CrwlExtensionUtils\Exceptions\InvalidStepBuilderException;
 use Crwlr\CrwlExtensionUtils\StepBuilder;
@@ -62,6 +63,66 @@ it('correctly gets group when stepId contains a "."', function () {
         ->toBe('foo.bar')
         ->and($builder->group())
         ->toBe('foo');
+});
+
+it(
+    'returns StepOutputType::Mixed from the outputType() method, when nothing else is defined in the child class',
+    function () {
+        $builder = new class extends StepBuilder {
+            public function stepId(): string
+            {
+                return 'foo.baz';
+            }
+
+            public function label(): string
+            {
+                return 'This is the foo baz step';
+            }
+
+            public function configToStep(array $stepConfig): StepInterface
+            {
+                return new class extends Step {
+                    protected function invoke(mixed $input): Generator
+                    {
+                        yield 'hello';
+                    }
+                };
+            }
+        };
+
+        expect($builder->outputType())->toBe(StepOutputType::Mixed);
+    },
+);
+
+test('you can implement an outputType() method in a child class', function () {
+    $builder = new class extends StepBuilder {
+        public function stepId(): string
+        {
+            return 'baz.quz';
+        }
+
+        public function label(): string
+        {
+            return 'This is the baz quz step';
+        }
+
+        public function configToStep(array $stepConfig): StepInterface
+        {
+            return new class extends Step {
+                protected function invoke(mixed $input): Generator
+                {
+                    yield 'hey';
+                }
+            };
+        }
+
+        public function outputType(): StepOutputType
+        {
+            return StepOutputType::Scalar;
+        }
+    };
+
+    expect($builder->outputType())->toBe(StepOutputType::Scalar);
 });
 
 it('gets a value from a step config array', function () {

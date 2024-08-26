@@ -3,6 +3,7 @@
 namespace Crwlr\CrwlExtensionUtils;
 
 use Crwlr\Crawler\Steps\StepInterface;
+use Crwlr\Crawler\Steps\StepOutputType;
 use Crwlr\CrwlExtensionUtils\Exceptions\InvalidStepBuilderException;
 
 abstract class StepBuilder
@@ -42,6 +43,15 @@ abstract class StepBuilder
      * @param mixed[] $stepConfig
      */
     abstract public function configToStep(array $stepConfig): StepInterface;
+
+    /**
+     * @deprecated In v3.0 it will be required to implement this method in all child classes,
+     *             and this default implementation will be changed to an abstract method definition.
+     */
+    public function outputType(): StepOutputType
+    {
+        return StepOutputType::Mixed;
+    }
 
     /**
      * @throws InvalidStepBuilderException
