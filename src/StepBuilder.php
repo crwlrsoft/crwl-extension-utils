@@ -19,6 +19,8 @@ abstract class StepBuilder
      */
     public readonly array $config;
 
+    public readonly string $outputType;
+
     protected ?string $fileStoragePath = null;
 
     /**
@@ -33,6 +35,12 @@ abstract class StepBuilder
         $this->label = $this->label();
 
         $this->config = $this->configToArray();
+
+        $this->outputType = match ($this->outputType()) {
+            StepOutputType::Mixed => 'mixed',
+            StepOutputType::AssociativeArrayOrObject => 'array',
+            StepOutputType::Scalar => 'scalar',
+        };
     }
 
     abstract public function stepId(): string;
