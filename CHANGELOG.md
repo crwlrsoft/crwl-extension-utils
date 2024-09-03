@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Allow usage of `crwlr/crawler` v2.0.
 * Method `StepBuilder::outputType()`, returning a `Crwlr\Crawler\Steps\StepOutputType` enum instance, informing about the possible output type of the underlying step. Currently, there is a default implementation in the abstract `StepBuilder` class, returning `StepOutputType::Mixed`. But this implementation will be removed in v3.0, so child classes should always explicitly define the possible output type. More info in the readme file. __Attention__: As `Crwlr\Crawler\Steps\StepOutputType` was introduced in `crwlr/crawler` v1.8.0, this is now the minimum required version of the crawler package.
+* Method `StepBuilder::isLoadingStep()`, so the crwl.io app knows if it's dealing with a loading step. Default implementation just returns false, so in loading steps you need to provide an implementation of this method, returning true.
 
 ## [2.3.1] - 2024-06-18
 ### Fixed
