@@ -164,6 +164,15 @@ public function configToStep(array $stepConfig): StepInterface
 }
 ```
 
+When creating a step builder for an HTTP loading step, please implement the following method:
+
+```php
+public function isLoadingStep(): bool
+{
+    return true;
+}
+```
+
 ### ServiceProvider and Registering Package and Steps
 
 To make your steps accessible in the crwl.io app, the final step is to register an extension package and all your steps using the `ExtensionPackageManager` included in this package. Since crwl.io is a [Laravel](https://laravel.com/) application, this is accomplished through a `ServiceProvider` class:

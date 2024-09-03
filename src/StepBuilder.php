@@ -21,6 +21,8 @@ abstract class StepBuilder
 
     public readonly string $outputType;
 
+    public readonly bool $isLoadingStep;
+
     protected ?string $fileStoragePath = null;
 
     /**
@@ -41,6 +43,8 @@ abstract class StepBuilder
             StepOutputType::AssociativeArrayOrObject => 'array',
             StepOutputType::Scalar => 'scalar',
         };
+
+        $this->isLoadingStep = $this->isLoadingStep();
     }
 
     abstract public function stepId(): string;
@@ -59,6 +63,15 @@ abstract class StepBuilder
     public function outputType(): StepOutputType
     {
         return StepOutputType::Mixed;
+    }
+
+    /**
+     * When making a StepBuilder for a loading step, please add a child implementation of this method,
+     * returning true.
+     */
+    public function isLoadingStep(): bool
+    {
+        return false;
     }
 
     /**
