@@ -22,20 +22,26 @@
             "role": "Developer"
         }
     ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/otsch"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "crwlr/crawler": "^1.8|^2.0",
-        "illuminate/support": "^9.27|^10.0"
+        "illuminate/support": "^9.27|^10.0|^11.0"
     },
     "require-dev": {
-        "pestphp/pest": "^2.4",
-        "friendsofphp/php-cs-fixer": "^3.48",
+        "pestphp/pest": "^2.4|^3.0",
+        "friendsofphp/php-cs-fixer": "^3.57",
         "phpstan/phpstan": "^1.10",
-        "pestphp/pest-plugin-laravel": "^2.2",
-        "orchestra/testbench": "^8.21"
+        "pestphp/pest-plugin-laravel": "^2.2|^3.0",
+        "orchestra/testbench": "^8.21|^9.0"
     },
     "scripts": {
-        "test": "@php vendor/bin/pest",
+        "test": "@php vendor/bin/pest --display-warnings --bail",
         "cs": "@php vendor/bin/php-cs-fixer fix -v --dry-run",
         "cs-fix": "@php vendor/bin/php-cs-fixer fix -v",
         "stan": "@php vendor/bin/phpstan analyse -c phpstan.neon",
