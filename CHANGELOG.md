@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.2] - 2024-12-08
+### Fixed
+* Support `crwlr/crawler` v3.0.
+
 ## [2.4.1] - 2024-11-06
 ### Fixed
 * Support `illuminate/support` 11.x.
