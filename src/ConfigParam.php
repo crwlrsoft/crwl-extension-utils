@@ -74,10 +74,10 @@ final class ConfigParam
             return is_int($value) ? $value : (int) $value;
         } elseif ($this->type === ConfigParamTypes::Float) {
             return is_float($value) ? $value : (float) $value;
-        } elseif ($this->type === ConfigParamTypes::String || $this->type === ConfigParamTypes::MultiLineString) {
+        } elseif (in_array($this->type, [ConfigParamTypes::String, ConfigParamTypes::MultiLineString], true)) {
             return is_string($value) ? $value : (string) $value;
         }
 
-        return $value; // @phpstan-ignore-line
+        return $value;
     }
 }
